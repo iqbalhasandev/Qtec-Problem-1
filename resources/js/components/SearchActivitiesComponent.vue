@@ -140,12 +140,18 @@
           <tr>
             <th>Search Term</th>
             <th>Result</th>
+            <th>Date</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(activity, index) in activities" :key="index">
-            <td>{{ activity.search_term }}</td>
+            <td>
+              <a :href="'/?search=' + activity.search_term">{{
+                activity.search_term
+              }}</a>
+            </td>
             <td>{{ activity.results_count }}</td>
+            <td>{{ formateDate(activity.created_at) }}</td>
             <td></td>
           </tr>
         </tbody>
@@ -155,6 +161,7 @@
 </template>
 
 <script>
+import moment from "moment";
 export default {
   data() {
     return {
@@ -179,6 +186,9 @@ export default {
     this.getFilters();
   },
   methods: {
+    formateDate(date) {
+      return moment(date).format("YYYY-MM-DD");
+    },
     reset() {
       this.keywords = [];
       this.users = [];
