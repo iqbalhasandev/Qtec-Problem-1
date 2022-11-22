@@ -19,11 +19,6 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\PostController::class, 'index'])->name('post')->middleware('auth');
 
-Route::get('/search-activity', [UserSearchActivityController::class, 'index'])->name('search-activity.index');
-Route::get('/search-activity/get-activities', [UserSearchActivityController::class, 'getActivities'])->name('search-activity.getActivities');
-Route::get('/search-activity/get-filters', [UserSearchActivityController::class, 'filters'])->name('search-activity.filters');
-
-
-Route::get('/test', function () {
-    return view('test');
-});
+Route::get('/search-activity', [UserSearchActivityController::class, 'index'])->name('search-activity.index')->middleware('auth');
+Route::get('/search-activity/get-activities', [UserSearchActivityController::class, 'getActivities'])->name('search-activity.getActivities')->middleware('auth');
+Route::get('/search-activity/get-filters', [UserSearchActivityController::class, 'filters'])->name('search-activity.filters')->middleware('auth');
